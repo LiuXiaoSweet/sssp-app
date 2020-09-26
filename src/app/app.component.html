@@ -1,0 +1,274 @@
+<div class="maxDiv" id="maxDiv">
+    <div class="navigation">
+        <div class="main">
+            <div class="logo">
+                <img class="cursor" src="assets/static/img/logo.png" alt="logo">
+            </div>
+
+            <div class="ConnectedButton"
+                style="width: 60px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"
+                *ngIf="boot.isConnected; else noConnect">
+                <span>{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
+                <img src="assets/static/img/conncted.png" alt="">
+            </div>
+            <ng-template #noConnect>
+                <!-- data-toggle="modal" data-target="#con-close-modal -->
+                <button class="noConnectButton btn btn-primary" (click)="connectWallet()">
+                    <img src="assets/static/img/noConnct.png" alt="">
+                    <span>Connect to a Wallet</span>
+                </button>
+            </ng-template>
+        </div>
+    </div>
+    <div class="trade-pc">
+        <div class="main">
+            <div class="swapContent">
+                <ul class="tabDiv">
+                    <li [ngClass]="{active: curTab==0}" (click)="changeTab(0)">Swap</li>
+                    <li [ngClass]="{active: curTab==1}" (click)="changeTab(1)">Add Liquidity</li>
+                    <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">Manage Liquidity</li>
+                </ul>
+                <div class="SwapDiv">
+                    <!-- 兑换 -->
+                    <div class="swap-pc" [hidden]="curTab!=0">
+                        <div class="main">
+
+                            <div class="el-checkbox-group">
+                                <div class="el-checkbox l" label="复选框 A">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/DAI.png" alt="">
+                                    <span>DAI</span>
+                                </div>
+                                <div class="el-checkbox border_let r" label="复选框 C">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/DAI.png" alt="">
+                                    <span>DAI</span>
+                                </div>
+                            </div>
+                            <div class="el-checkbox-group">
+                                <div class="el-checkbox l" label="复选框 A">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/BNB.png" alt="">
+                                    <span>BUSD</span>
+                                </div>
+                                <div class="el-checkbox border_let r" label="复选框 C">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/BNB.png" alt="">
+                                    <span>BUSD</span>
+                                </div>
+                            </div>
+                            <div class="el-checkbox-group">
+                                <div class="el-checkbox l" label="复选框 A">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/USDT.png" alt="">
+                                    <span>USDT</span>
+                                </div>
+                                <div class="el-checkbox border_let r" label="复选框 C">
+                                    <input type="checkbox" name="" id="">
+                                    <img src="assets/static/img/coins/USDT.png" alt="">
+                                    <span>USDT</span>
+                                </div>
+                            </div>
+                            <div class="enterDiv">
+                                <img src="assets/static/img/exchange.png" alt="">
+                                <div class="blanceDiv"><span class="blance">Balance</span>
+                                    <p><span>67461</span> <span>USDT</span></p>
+                                </div>
+                                <div class="inputDiv">
+                                    <div>
+                                        <input type="text" name="" id="" placeholder="Enter an amount">
+                                        <span>MAX</span>
+                                    </div>
+                                    <div>
+                                        <input type="text" name="" id="" placeholder="Estimated">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="butDiv">
+                            <div>
+                                <span>DAI/USDT Rate (including fees): 0.98786</span>
+                                <img src="assets/static/img/qiehuan.png" alt="">
+                            </div>
+                            <button>Connect to a Wallet</button>
+                        </div>
+                    </div>
+                    <!-- 增加流动性 -->
+                    <div class="addLiqui-pc" [hidden]="curTab!=1">
+                        <div class="main">
+
+                            <div class="coinDiv">
+                                <div class="firstPart">
+                                    <div>
+                                        <img src="assets/static/img/coins/DAI.png" alt="">
+                                        <span>DAI</span>
+                                    </div>
+                                    <div>
+                                        <span>Balance</span>
+                                        <span>6741</span>
+                                        <span>DAI</span>
+                                    </div>
+                                </div>
+                                <div class="second">
+                                    <input type="text" name="" id="" placeholder="Enter an amount">
+                                </div>
+                            </div>
+                            <div class="coinDiv">
+                                <div class="firstPart">
+                                    <div>
+                                        <img src="assets/static/img/coins/BNB.png" alt="">
+                                        <span>BUSD</span>
+                                    </div>
+                                    <div>
+                                        <span>Balance</span>
+                                        <span>6741</span>
+                                        <span>BUSD</span>
+                                    </div>
+                                </div>
+                                <div class="second">
+                                    <input type="text" name="" id="" placeholder="Enter an amount">
+                                </div>
+                            </div>
+                            <div class="coinDiv">
+                                <div class="firstPart">
+                                    <div>
+                                        <img src="assets/static/img/coins/USDT.png" alt="">
+                                        <span>USDT</span>
+                                    </div>
+                                    <div>
+                                        <span>Balance</span>
+                                        <span>6741</span>
+                                        <span>USDT</span>
+                                    </div>
+                                </div>
+                                <div class="second">
+                                    <input type="text" name="" id="" placeholder="Enter an amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="butDiv">
+                            <button>Add Liquidity</button>
+                        </div>
+                    </div>
+
+                    <!-- 取出流动性 -->
+                    <div class="withdrawLiqui-pc" [hidden]="curTab!=2">
+                        <div class="main">
+                            <div class="LiquidityRatio">
+                                <p>Your pool share (%)</p>
+                                <div class="enterDiv">
+                                    <input type="text" name="" id="" placeholder="Please enter a number (%)">
+                                </div>
+                            </div>
+                            <div>
+                                <div class="el-checkbox-group">
+                                    <div class="coinDiv">
+                                        <div class="firstPart">
+                                            <div>
+                                                <img src="assets/static/img/coins/DAI.png" alt="">
+                                                <span>DAI</span>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" name="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="second">
+                                            <input type="text" name="" id="" placeholder="Enter an amount">
+                                        </div>
+                                    </div>
+                                    <div class="coinDiv">
+                                        <div class="firstPart">
+                                            <div>
+                                                <img src="assets/static/img/coins/BNB.png" alt="">
+                                                <span>BUSD</span>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" name="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="second">
+                                            <input type="text" name="" id="" placeholder="Enter an amount">
+                                        </div>
+                                    </div>
+                                    <div class="coinDiv">
+                                        <div class="firstPart">
+                                            <div>
+                                                <img src="assets/static/img/coins/USDT.png" alt="">
+                                                <span>USDT</span>
+                                            </div>
+                                            <div>
+                                                <input type="checkbox" name="" id="">
+                                            </div>
+                                        </div>
+                                        <div class="second">
+                                            <input type="text" name="" id="" placeholder="Enter an amount">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="butDiv">
+                            <button>Withdraw Liquidity</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="assetDiv">
+                <div class="main">
+                    <div class="tittle">
+                        <div></div>
+                        <p>Liquidity</p>
+                    </div>
+                    <div class="consinfo">
+                        <ul>
+                            <li>
+                                <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai}}</em></p>
+                                <span>23%</span>
+                            </li>
+                            <li>
+                                <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd}}</em></p>
+                                <span>48%</span>
+                            </li>
+                            <li>
+                                <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt}}</em></p>
+                                <span>29%</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="sum">
+                        <p>DAI+USDC+USDT：</p>
+                        <p>{{getTotal()}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="con-close-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true" style="display: none;">
+        <div class="modal-dialog" id="fabu">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <img src="assets/static/img/wallet.png" alt="">
+                    <h4 class="road_title">
+                        Connect to a Wallet
+                    </h4>
+                    <p>Please select a wallet to connect</p>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <ul>
+                            <li>
+                                <img src="assets/static/img/wallet/metamask.png" alt="">
+                                <span>MetaMask</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

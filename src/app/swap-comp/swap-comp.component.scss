@@ -59,7 +59,6 @@
  .swap-pc .main .enterDiv .blanceDiv {
     height: 38px;
     padding-top: 10px;
-    width: 45%;
 }
 
  .swap-pc .main .enterDiv .blanceDiv .blance {
@@ -69,10 +68,11 @@
     font-weight: 400;
     color: #000000;
     line-height: 28px;
+    margin-right: 10px;
 }
 
  .swap-pc .main .enterDiv .blanceDiv p {
-    float: right;
+    float: left;
     font-size: 12px;
     font-family: PingFangSC-Regular, PingFang SC;
     font-weight: 400;

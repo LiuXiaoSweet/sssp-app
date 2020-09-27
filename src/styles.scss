@@ -234,20 +234,20 @@ button {
 }
 
 select,
-input,
+// input,
 textarea {
     margin: 0;
     border: none;
 }
 
-input {
-    padding-top: 0;
-    padding-bottom: 0;
-    border-radius: 0;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    outline: none;
-}
+// input {
+//     padding-top: 0;
+//     padding-bottom: 0;
+//     border-radius: 0;
+//     -webkit-appearance: none;
+//     -moz-appearance: none;
+//     outline: none;
+// }
 
 /*防止拖动 影响布局*/
 textarea {

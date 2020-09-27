@@ -15,4 +15,14 @@ export class PoolInfoComponent implements OnInit {
     getTotal() {
         return this.boot.poolInfo.dai.plus(this.boot.poolInfo.busd).plus(this.boot.poolInfo.usdt);
     }
+
+    daiPercent() {
+        return this.boot.poolInfo.dai.div(this.getTotal()).multipliedBy(100);
+    }
+    busdPercent() {
+        return this.boot.poolInfo.busd.div(this.getTotal()).multipliedBy(100);
+    }
+    usdtPercent() {
+        return this.boot.poolInfo.usdt.div(this.getTotal()).multipliedBy(100);
+    }
 }

@@ -52,20 +52,20 @@
             </div>
             <div class="inputDiv">
                 <div>
-                    <input type="text" name="amt" [(ngModel)]="amt" placeholder="Enter an amount">
+                    <input type="number" name="amt" [(ngModel)]="amt" placeholder="Enter an amount">
                     <span (click)="maxAmt()">MAX</span>
                 </div>
                 <div>
-                    <input type="text" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
+                    <input type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
                 </div>
             </div>
         </div>
     </div>
-    <div class="butDiv">
-        <div>
+    <div class="butDiv" style="margin-top: 1em;">
+        <!-- <div>
             <span>DAI/USDT Rate (including fees): 0.98786</span>
             <img src="assets/static/img/qiehuan.png" alt="">
-        </div>
+        </div> -->
         <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
             Approve</button>
         <button *ngIf="boot.accounts.length>0&&approved" (click)="exchange()" [disabled]="status==3">Next

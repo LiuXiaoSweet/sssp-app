@@ -106,7 +106,7 @@ export class BootService {
             let usdtDecimals = await this.usdtContract.methods.decimals().call({ from: this.accounts[0] });
 
             let lpBalanceStr = await this.poolContract.methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
-            let lpDecimals = await this.poolContract.methods.balanceOf(this.accounts[0]).call({ from: this.accounts[0] });
+            let lpDecimals = await this.poolContract.methods.decimals().call({ from: this.accounts[0] });
 
             this.balance.dai = new BigNumber(daiBalanceStr).div(new BigNumber(10).exponentiatedBy(daiDecimals));
             this.balance.busd = new BigNumber(busdBalanceStr).div(new BigNumber(10).exponentiatedBy(busdDecimals));
@@ -122,6 +122,7 @@ export class BootService {
             this.poolInfo.usdt = new BigNumber(pUsdtBalanceStr).div(new BigNumber(10).exponentiatedBy(usdtDecimals));
 
             let totalSupplyStr = await this.poolContract.methods.totalSupply().call({ from: this.accounts[0] });
+            this.poolInfo.totalSupply = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
             this.poolInfo.fee = new BigNumber(totalSupplyStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
         }
     }
@@ -133,7 +134,7 @@ export class BootService {
             usdtAmt = this.web3.utils.toWei(usdtAmt, 'ether');
             let data = this.poolContract.methods.add_liquidity([daiAmt, busdAmt, usdtAmt], 0).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }
@@ -158,7 +159,7 @@ export class BootService {
             minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
             let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, value: 0, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, value: 0, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }
@@ -170,10 +171,10 @@ export class BootService {
             daiAmt = this.web3.utils.toWei(daiAmt, 'ether');
             busdAmt = this.web3.utils.toWei(busdAmt, 'ether');
             usdtAmt = this.web3.utils.toWei(usdtAmt, 'ether');
-            let lp = await this.poolContract.methods.balanceOf(this.accounts[0]);
-            let data = this.poolContract.methods.remove_liquidity_imbalance([daiAmt, busdAmt, usdtAmt], lp).encodeABI();
+            let lp = await this.poolContract.methods.balanceOf(this.accounts[0]).call();
+            let data = this.poolContract.methods.remove_liquidity_imbalance([daiAmt, busdAmt, usdtAmt], lp.toString()).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }

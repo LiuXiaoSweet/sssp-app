@@ -7,22 +7,22 @@
         <div class="consinfo">
             <ul>
                 <li>
-                    <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai}}</em></p>
+                    <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai.toFixed(9)}}</em></p>
                     <span>23%</span>
                 </li>
                 <li>
-                    <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd}}</em></p>
+                    <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd.toFixed(9)}}</em></p>
                     <span>48%</span>
                 </li>
                 <li>
-                    <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt}}</em></p>
+                    <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt.toFixed(9)}}</em></p>
                     <span>29%</span>
                 </li>
             </ul>
         </div>
         <div class="sum">
             <p>DAI+USDC+USDT：</p>
-            <p>{{getTotal()}}</p>
+            <p>{{getTotal().toFixed(9)}}</p>
         </div>
     </div>
 </div>

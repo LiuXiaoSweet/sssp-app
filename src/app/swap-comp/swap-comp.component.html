@@ -1,5 +1,5 @@
 <!-- 兑换 -->
-<div class="swap-pc" >
+<div class="swap-pc">
     <div class="main">
 
         <div class="el-checkbox-group">
@@ -21,7 +21,7 @@
                 <span>BUSD</span>
             </div>
             <div class="el-checkbox border_let r" label="复选框 C">
-                <input type="radio" [ngModel]="right" name="righ" value="1" (ngModelChange)="chooseRight($event)">
+                <input type="radio" [ngModel]="right" name="right" value="1" (ngModelChange)="chooseRight($event)">
                 <img src="assets/static/img/coins/BNB.png" alt="">
                 <span>BUSD</span>
             </div>
@@ -41,15 +41,22 @@
         <div class="enterDiv">
             <img src="assets/static/img/exchange.png" alt="">
             <div class="blanceDiv"><span class="blance">Balance</span>
-                <p><span>67461</span> <span>USDT</span></p>
+                <p [ngSwitch]="left">
+                    <span *ngSwitchCase="'0'">{{boot.balance.dai.toFixed(9)}}</span> <span
+                        *ngSwitchCase="'0'">DAI</span>
+                    <span *ngSwitchCase="'1'">{{boot.balance.busd.toFixed(9)}}</span> <span
+                        *ngSwitchCase="'1'">BUSD</span>
+                    <span *ngSwitchCase="'2'">{{boot.balance.usdt.toFixed(9)}}</span> <span
+                        *ngSwitchCase="'2'">USDT</span>
+                </p>
             </div>
             <div class="inputDiv">
                 <div>
-                    <input type="text" name="" placeholder="Enter an amount">
-                    <span>MAX</span>
+                    <input type="text" name="amt" [(ngModel)]="amt" placeholder="Enter an amount">
+                    <span (click)="maxAmt()">MAX</span>
                 </div>
                 <div>
-                    <input type="text" name="" placeholder="Estimated">
+                    <input type="text" name="" placeholder="Min Amount">
                 </div>
             </div>
         </div>

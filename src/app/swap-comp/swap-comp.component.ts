@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import BigNumber from 'bignumber.js';
 import { BootService } from '../services/boot.service';
 
+export enum ActionStatus {
+    None, Approving, Approved, Exchaging, Exchanged
+}
+
 @Component({
     selector: 'app-swap-comp',
     templateUrl: './swap-comp.component.html',
@@ -15,6 +19,12 @@ export class SwapCompComponent implements OnInit {
     balance: BigNumber;
 
     amt: string;
+
+    minAmt: string;
+
+    approved: boolean = false;
+
+    status: ActionStatus = ActionStatus.None;
 
     constructor(public boot: BootService) { }
 
@@ -54,6 +64,27 @@ export class SwapCompComponent implements OnInit {
             case '2':
                 this.amt = this.boot.balance.usdt.toFixed(9);
                 break;
+        }
+    }
+
+    approve() {
+        if (this.amt) {
+            this.status = ActionStatus.Approving;
+            this.boot.approve(Number(this.left), this.amt).then(() => {
+                this.approved = true;
+                this.status = ActionStatus.Approved;
+            });
+        }
+    }
+
+    exchange() {
+        if (this.amt) {
+            this.status = ActionStatus.Exchaging;
+            this.boot.exchange(Number(this.left), Number(this.right), this.amt, this.minAmt ? this.minAmt : '0').then(res => {
+                this.status = ActionStatus.Exchanged;
+                this.approved = false;
+                console.log(res);
+            });
         }
     }
 }

@@ -56,7 +56,7 @@
                     <span (click)="maxAmt()">MAX</span>
                 </div>
                 <div>
-                    <input type="text" name="" placeholder="Min Amount">
+                    <input type="text" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
                 </div>
             </div>
         </div>
@@ -66,6 +66,10 @@
             <span>DAI/USDT Rate (including fees): 0.98786</span>
             <img src="assets/static/img/qiehuan.png" alt="">
         </div>
-        <button>Connect to a Wallet</button>
+        <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
+            Approve</button>
+        <button *ngIf="boot.accounts.length>0&&approved" (click)="exchange()" [disabled]="status==3">Next
+            Exchange</button>
+        <button *ngIf="boot.accounts.length==0">Connect to a Wallet</button>
     </div>
 </div>

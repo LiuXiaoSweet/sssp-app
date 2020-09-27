@@ -1,21 +1,28 @@
-<div>
-    <h2>币池情况</h2>
-    <p>
-        <label>DAI 数量: </label><span>lalalal</span>
-    </p>
-    <p>
-        <label>BUSD 数量: </label><span>lalalal</span>
-    </p>
-    <p>
-        <label>USDT 数量: </label><span>lalalal</span>
-    </p>
-    <p>
-        <label>Fee: </label><span>lalalal</span>>
-    </p>
-    <p>
-        <label>Admin Fee: </label><span>lalalal</span>
-    </p>
-    <p>
-        <label>Virtual Price: </label><span>lalalal</span>
-    </p>
+<div class="assetDiv">
+    <div class="main">
+        <div class="tittle">
+            <div></div>
+            <p>Liquidity</p>
+        </div>
+        <div class="consinfo">
+            <ul>
+                <li>
+                    <p><em class="coinName">DAI:</em> <em class="coinVal">{{boot.poolInfo.dai}}</em></p>
+                    <span>23%</span>
+                </li>
+                <li>
+                    <p><em class="coinName">BUSD:</em> <em class="coinVal">{{boot.poolInfo.busd}}</em></p>
+                    <span>48%</span>
+                </li>
+                <li>
+                    <p><em class="coinName">USDT:</em> <em class="coinVal">{{boot.poolInfo.usdt}}</em></p>
+                    <span>29%</span>
+                </li>
+            </ul>
+        </div>
+        <div class="sum">
+            <p>DAI+USDC+USDT：</p>
+            <p>{{getTotal()}}</p>
+        </div>
+    </div>
 </div>

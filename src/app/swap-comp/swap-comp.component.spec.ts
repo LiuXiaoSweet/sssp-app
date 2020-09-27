@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RedeemAllComponent } from './redeem-all.component';
+import { SwapCompComponent } from './swap-comp.component';
 
-describe('RedeemAllComponent', () => {
-  let component: RedeemAllComponent;
-  let fixture: ComponentFixture<RedeemAllComponent>;
+describe('SwapCompComponent', () => {
+  let component: SwapCompComponent;
+  let fixture: ComponentFixture<SwapCompComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RedeemAllComponent ]
+      declarations: [ SwapCompComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RedeemAllComponent);
+    fixture = TestBed.createComponent(SwapCompComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

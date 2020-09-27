@@ -2,33 +2,31 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AccInfoComponent } from './acc-info/acc-info.component';
 import { PoolInfoComponent } from './pool-info/pool-info.component';
-import { AddLiquidityComponent } from './add-liquidity/add-liquidity.component';
-import { SwapCoinComponent } from './swap-coin/swap-coin.component';
-import { RedeemCoinComponent } from './redeem-coin/redeem-coin.component';
-import { RedeemAllComponent } from './redeem-all/redeem-all.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IntallWalletDlgComponent } from './intall-wallet-dlg/intall-wallet-dlg.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { SwapCompComponent } from './swap-comp/swap-comp.component';
+import { AddliquidityCompComponent } from './addliquidity-comp/addliquidity-comp.component';
+import { RedeemliquidityCompComponent } from './redeemliquidity-comp/redeemliquidity-comp.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        AccInfoComponent,
         PoolInfoComponent,
-        AddLiquidityComponent,
-        SwapCoinComponent,
-        RedeemCoinComponent,
-        RedeemAllComponent,
-        IntallWalletDlgComponent
+        IntallWalletDlgComponent,
+        SwapCompComponent,
+        AddliquidityCompComponent,
+        RedeemliquidityCompComponent
     ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         MatDialogModule,
         MatButtonModule,
+        FormsModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

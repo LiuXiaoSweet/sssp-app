@@ -11,6 +11,7 @@ export class AppComponent {
 
     curTab = 0;
 
+    
     constructor(public boot: BootService) {
     }
 
@@ -22,7 +23,7 @@ export class AppComponent {
         this.curTab = tab;
     }
 
-    getTotal() {
-        return this.boot.poolInfo.dai.plus(this.boot.poolInfo.busd).plus(this.boot.poolInfo.usdt);
-    }
+    
+
+    
 }

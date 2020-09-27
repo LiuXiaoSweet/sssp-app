@@ -1,0 +1,64 @@
+<!-- 兑换 -->
+<div class="swap-pc" >
+    <div class="main">
+
+        <div class="el-checkbox-group">
+            <div class="el-checkbox l" label="复选框 A">
+                <input type="radio" [ngModel]="left" name="left" value="0" (ngModelChange)="chooseLeft($event)">
+                <img src="assets/static/img/coins/DAI.png" alt="">
+                <span>DAI</span>
+            </div>
+            <div class="el-checkbox border_let r" label="复选框 C">
+                <input type="radio" [ngModel]="right" name="right" value="0" (ngModelChange)="chooseRight($event)">
+                <img src="assets/static/img/coins/DAI.png" alt="">
+                <span>DAI</span>
+            </div>
+        </div>
+        <div class="el-checkbox-group">
+            <div class="el-checkbox l" label="复选框 A">
+                <input type="radio" [ngModel]="left" name="left" value="1" (ngModelChange)="chooseLeft($event)">
+                <img src="assets/static/img/coins/BNB.png" alt="">
+                <span>BUSD</span>
+            </div>
+            <div class="el-checkbox border_let r" label="复选框 C">
+                <input type="radio" [ngModel]="right" name="righ" value="1" (ngModelChange)="chooseRight($event)">
+                <img src="assets/static/img/coins/BNB.png" alt="">
+                <span>BUSD</span>
+            </div>
+        </div>
+        <div class="el-checkbox-group">
+            <div class="el-checkbox l" label="复选框 A">
+                <input type="radio" [ngModel]="left" name="left" value="2" (ngModelChange)="chooseLeft($event)">
+                <img src="assets/static/img/coins/USDT.png" alt="">
+                <span>USDT</span>
+            </div>
+            <div class="el-checkbox border_let r" label="复选框 C">
+                <input type="radio" [ngModel]="right" name="right" value="2" (ngModelChange)="chooseRight($event)">
+                <img src="assets/static/img/coins/USDT.png" alt="">
+                <span>USDT</span>
+            </div>
+        </div>
+        <div class="enterDiv">
+            <img src="assets/static/img/exchange.png" alt="">
+            <div class="blanceDiv"><span class="blance">Balance</span>
+                <p><span>67461</span> <span>USDT</span></p>
+            </div>
+            <div class="inputDiv">
+                <div>
+                    <input type="text" name="" placeholder="Enter an amount">
+                    <span>MAX</span>
+                </div>
+                <div>
+                    <input type="text" name="" placeholder="Estimated">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="butDiv">
+        <div>
+            <span>DAI/USDT Rate (including fees): 0.98786</span>
+            <img src="assets/static/img/qiehuan.png" alt="">
+        </div>
+        <button>Connect to a Wallet</button>
+    </div>
+</div>

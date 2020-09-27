@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AddLiquidityComponent } from './add-liquidity.component';
+import { AddliquidityCompComponent } from './addliquidity-comp.component';
 
-describe('AddLiquidityComponent', () => {
-  let component: AddLiquidityComponent;
-  let fixture: ComponentFixture<AddLiquidityComponent>;
+describe('AddliquidityCompComponent', () => {
+  let component: AddliquidityCompComponent;
+  let fixture: ComponentFixture<AddliquidityCompComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AddLiquidityComponent ]
+      declarations: [ AddliquidityCompComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AddLiquidityComponent);
+    fixture = TestBed.createComponent(AddliquidityCompComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

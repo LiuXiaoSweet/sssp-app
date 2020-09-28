@@ -1,3 +1,5 @@
+@import '../global.scss';
+
 .withdrawLiqui-pc {
     /* display: none; */
     /*隐藏  取出流动性*/
@@ -136,7 +138,7 @@
     width: 90%;
     margin: 0px auto;
     height: 50px;
-    background: #2480FF;
+    // background: #2480FF;
     border-radius: 16px;
     color: #fff;
     font-size: 16px;

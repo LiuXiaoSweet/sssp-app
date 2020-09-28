@@ -1,3 +1,5 @@
+@import './global.scss';
+
 #maxDiv {
     background-color: #ffff;
 }
@@ -53,17 +55,33 @@
     float: left;
     width: 19%;
 }
+
 #maxDiv .navigation .main .ConnectedButton img {
     float: right;
     width: 30px;
 }
-#maxDiv .navigation .main .ConnectedButton span {
+
+#maxDiv .navigation .main .ConnectedButton .address {
     width: 60px;
     overflow: hidden;
-    white-space: nowrap; 
+    white-space: nowrap;
     text-overflow: ellipsis;
     display: inline-block;
     line-height: 25px;
+}
+
+#maxDiv .navigation .main .ConnectedButton .network {
+    padding: 0px 10px;
+    margin-right: 10px;
+    background: #2480FF;
+    border-radius: 12px;
+    height: 25px;
+    line-height: 25px;
+    display: inline-block;
+    color: #ffff;
+    text-align: center;
+    float: left;
+
 }
 
 #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {

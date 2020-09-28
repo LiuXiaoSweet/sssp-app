@@ -16,7 +16,7 @@
                             <span>DAI</span>
                         </div>
                         <div>
-                            <input type="checkbox">
+                            <!-- <input type="checkbox"> -->
                         </div>
                     </div>
                     <div class="second">
@@ -30,7 +30,7 @@
                             <span>BUSD</span>
                         </div>
                         <div>
-                            <input type="checkbox">
+                            <!-- <input type="checkbox"> -->
                         </div>
                     </div>
                     <div class="second">
@@ -44,7 +44,7 @@
                             <span>USDT</span>
                         </div>
                         <div>
-                            <input type="checkbox">
+                            <!-- <input type="checkbox"> -->
                         </div>
                     </div>
                     <div class="second">
@@ -56,6 +56,9 @@
 
     </div>
     <div class="butDiv">
-        <button (click)="redeemCoin()">Withdraw Liquidity</button>
+        <button *ngIf="boot.accounts.length>0" (click)="redeemCoin()" [disabled]="status===1"
+            [ngClass]="{'myBtn':status===0||status===2,'myBtn-disabled': status===1}">Withdraw Liquidity</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
+            Wallet</button>
     </div>
 </div>

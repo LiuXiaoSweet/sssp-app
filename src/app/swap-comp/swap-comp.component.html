@@ -56,7 +56,9 @@
                     <span (click)="maxAmt()">MAX</span>
                 </div>
                 <div>
-                    <input type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
+                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
+                    <button (click)="approve()" [disabled]="status==1"
+                        [ngClass]="{myBtn: status!==1,'myBtn-disabled':boot.accounts.length===0||status===1||status===3}">Approve</button>
                 </div>
             </div>
         </div>
@@ -66,10 +68,11 @@
             <span>DAI/USDT Rate (including fees): 0.98786</span>
             <img src="assets/static/img/qiehuan.png" alt="">
         </div> -->
-        <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
-            Approve</button>
-        <button *ngIf="boot.accounts.length>0&&approved" (click)="exchange()" [disabled]="status==3">Next
-            Exchange</button>
-        <button *ngIf="boot.accounts.length==0">Connect to a Wallet</button>
+        <!-- <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
+            Approve</button> -->
+        <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status==3"
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">Exchange</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
+            Wallet</button>
     </div>
 </div>

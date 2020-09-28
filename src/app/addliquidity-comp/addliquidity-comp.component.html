@@ -16,6 +16,9 @@
             </div>
             <div class="second">
                 <input type="number" name="daiAmt" [(ngModel)]="daiAmt" placeholder="Enter an amount">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveDai()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -32,6 +35,9 @@
             </div>
             <div class="second">
                 <input type="number" name="busdAmt" [(ngModel)]="busdAmt" placeholder="Enter an amount">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveBusd()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -48,15 +54,22 @@
             </div>
             <div class="second">
                 <input type="number" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="Enter an amount">
+                <button style="margin-bottom: 1em;"
+                    [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
+                    (click)="approveUsdt()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
             </div>
         </div>
     </div>
     <div class="butDiv">
-        <button (click)="approveDai()" style="margin-bottom: 1em;">Approve
+        <!-- <button (click)="approveDai()" style="margin-bottom: 1em;">Approve
             DAI</button>
         <button (click)="approveBusd()" style="margin-bottom: 1em;">Approve
             BUSD</button>
-        <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button>
-        <button (click)="addLiquidity()">Add Liquidity</button>
+        <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
+        <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()" [disabled]="status==3"
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">Add
+            Liquidity</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
+            Wallet</button>
     </div>
 </div>

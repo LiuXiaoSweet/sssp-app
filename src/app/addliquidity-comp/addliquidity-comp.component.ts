@@ -51,37 +51,31 @@ export class AddliquidityCompComponent implements OnInit {
     }
 
     approveDai() {
-        this.status = ActionStatus.daiApproving;
+        this.status = ActionStatus.Approving;
         if (this.daiAmt) {
             this.boot.approve(0, String(this.daiAmt ? this.daiAmt : 0)).then(r => {
                 this.daiApproved = true;
-                if (this.daiApproved && this.busdApproved && this.usdtApproved) {
-                    this.status = ActionStatus.Approved;
-                }
+                this.status = ActionStatus.Approved;
             });
         }
     }
 
     approveBusd() {
-        this.status = ActionStatus.busdApproving;
+        this.status = ActionStatus.Approving;
         if (this.busdAmt) {
             this.boot.approve(1, String(this.busdAmt ? this.busdAmt : 0)).then(r => {
                 this.busdApproved = true;
-                if (this.daiApproved && this.busdApproved && this.usdtApproved) {
-                    this.status = ActionStatus.Approved;
-                }
+                this.status = ActionStatus.Approved;
             });
         }
     }
 
     approveUsdt() {
-        this.status = ActionStatus.usdtApproving;
+        this.status = ActionStatus.Approving;
         if (this.daiAmt) {
             this.boot.approve(2, String(this.daiAmt ? this.daiAmt : 0)).then(r => {
                 this.usdtApproved = true;
-                if (this.daiApproved && this.busdApproved && this.usdtApproved) {
-                    this.status = ActionStatus.Approved;
-                }
+                this.status = ActionStatus.Approved;
             });
         }
     }

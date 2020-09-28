@@ -1,3 +1,4 @@
+@import '../global.scss';
  .swap-pc {
     background-color: #fff;
     height: auto;
@@ -42,7 +43,7 @@
 }
 
  .swap-pc .main .enterDiv {
-    width: 90%;
+    width: 95%;
     height: 32%;
     margin: 10px auto 0px;
     border-top: 1px solid #E1E5EA;
@@ -50,15 +51,15 @@
 }
 
  .swap-pc .main .enterDiv img {
-    width: 40px;
+    width: 55px;
     position: absolute;
-    top: -21px;
-    left: 45%;
+    top: -30px;
+    left: 43%;
 }
 
  .swap-pc .main .enterDiv .blanceDiv {
-    height: 38px;
-    padding-top: 10px;
+    height: 44px;
+    padding-top: 14px;
 }
 
  .swap-pc .main .enterDiv .blanceDiv .blance {
@@ -99,7 +100,7 @@
     width: 98%;
     margin: 0 auto;
     border: 1px solid #E1E5EA;
-    border-radius: 15px;
+    border-radius: 12px;
     font-size: 12px;
 }
 
@@ -109,6 +110,41 @@
     right: 10px;
     color: #2480FF;
 }
+
+.swap-pc .main .enterDiv .inputDiv div .minInput {
+    background: #FAFAFA;
+    padding: 0px 13px;
+    height: 40px;
+    width: 65%;
+    margin: 0 auto;
+    border: 1px solid #E1E5EA;
+    border-radius: 12px;
+    font-size: 12px;
+    margin-right: 3px;
+}
+
+.swap-pc .main .enterDiv .inputDiv div .approve { 
+    // display: none;  /*隐藏按钮*/
+    background: #2480FF;
+    border-radius: 12px;
+    width: 60px;
+    font-size: 12px;
+    line-height: 40px;
+    height: 40px;
+    color: #ffffff;
+}
+
+.swap-pc .main .enterDiv .inputDiv div .noApprove { 
+    // display: none;  /*隐藏按钮*/
+    background: #D4DDE9;
+    border-radius: 12px;
+    width: 60px;
+    font-size: 12px;
+    line-height: 40px;
+    height: 40px;
+    color: #ffffff;
+}
+
 
  .swap-pc .butDiv {
     width: 100%;
@@ -136,7 +172,7 @@
     width: 90%;
     margin: 0px auto;
     height: 50px;
-    background: #2480FF;
+    // background: #2480FF;
     border-radius: 16px;
     color: #fff;
     font-size: 16px;

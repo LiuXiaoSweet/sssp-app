@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import BigNumber from 'bignumber.js';
 import { BootService } from '../services/boot.service';
 
 @Component({
@@ -17,12 +18,24 @@ export class PoolInfoComponent implements OnInit {
     }
 
     daiPercent() {
-        return this.boot.poolInfo.dai.div(this.getTotal()).multipliedBy(100);
+        if (this.getTotal().comparedTo(0) === 0) {
+            return new BigNumber(0);
+        } else {
+            return this.boot.poolInfo.dai.div(this.getTotal()).multipliedBy(100);
+        }
     }
     busdPercent() {
-        return this.boot.poolInfo.busd.div(this.getTotal()).multipliedBy(100);
+        if (this.getTotal().comparedTo(0) === 0) {
+            return new BigNumber(0);
+        } else {
+            return this.boot.poolInfo.busd.div(this.getTotal()).multipliedBy(100);
+        }
     }
     usdtPercent() {
-        return this.boot.poolInfo.usdt.div(this.getTotal()).multipliedBy(100);
+        if (this.getTotal().comparedTo(0) === 0) {
+            return new BigNumber(0);
+        } else {
+            return this.boot.poolInfo.usdt.div(this.getTotal()).multipliedBy(100);
+        }
     }
 }

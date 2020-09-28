@@ -6,7 +6,7 @@
             </div>
 
             <div class="ConnectedButton"
-              *ngIf="boot.isConnected; else noConnect">
+              *ngIf="boot.isConnected&&boot.accounts.length>0; else noConnect">
                 <span>{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
                 <img src="assets/static/img/conncted.png" alt="">
             </div>

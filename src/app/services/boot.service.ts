@@ -9,6 +9,7 @@ import { PoolInfo } from '../model/pool-info';
 import { Contract } from 'web3-eth-contract';
 import { environment } from 'src/environments/environment';
 import { BigNumber } from 'bignumber.js';
+import { UnsupportedNetworkComponent } from '../unsupported-network/unsupported-network.component';
 @Injectable({
     providedIn: 'root'
 })
@@ -33,10 +34,29 @@ export class BootService {
 
     contracts: Array<Contract> = new Array();
     contractsAddress: Array<string> = new Array();
+    chainConfig: any;
+    chainId: number;
 
 
     constructor(private dialog: MatDialog) {
         let acc = 0;
+        let intervalCheckNetwork = interval(500).subscribe(async num => {
+            if (this.web3) {
+                let chainId = await this.web3.eth.getChainId();
+                if (this.chainId != chainId) {
+                    if (!environment.chains[chainId]) {
+                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                    } else if (!environment.chains[chainId].enabled) {
+                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                        this.chainConfig = environment.chains[chainId];
+                    } else {
+                        this.chainConfig = environment.chains[chainId];
+                        this.initContracts();
+                    }
+                    this.chainId = chainId;
+                }
+            }
+        });
         let intervalSubject = interval(200).subscribe(
             async num => {
                 acc += num;
@@ -47,33 +67,41 @@ export class BootService {
                     this.isConnected = await this.bianceChain.isConnected();
                     // @ts-ignore
                     this.web3 = new Web3(window.BinanceChain);
-
-                    if (this.isConnected) {
-                        this.web3.eth.getAccounts().then(accounts => {
-                            this.accounts = accounts;
-                            this.loadData();
-                        });
+                    let chainId = await this.web3.eth.getChainId();
+                    this.chainConfig = environment.chains[chainId];
+                    this.chainId = chainId;
+                    if (!this.chainConfig || !this.chainConfig.enabled) {
+                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                        return;
                     }
 
                     // @ts-ignore
-                    this.daiContract = new this.web3.eth.Contract(environment.coinABI, environment.contracts.DAI.address);
+                    window.BinanceChain.on('chainChanged', (_chainId) => {
+                        this.chainConfig = environment.chains[_chainId];
+                        if (!this.chainConfig || !this.chainConfig.enabled) {
+                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                            return;
+                        }
+                    });
                     // @ts-ignore
-                    this.busdContract = new this.web3.eth.Contract(environment.coinABI, environment.contracts.BUSD.address);
-                    // @ts-ignore
-                    this.usdtContract = new this.web3.eth.Contract(environment.coinABI, environment.contracts.USDT.address);
-                    this.contracts.push(this.daiContract);
-                    this.contracts.push(this.busdContract);
-                    this.contracts.push(this.usdtContract);
-                    this.contractsAddress.push(environment.contracts.DAI.address);
-                    this.contractsAddress.push(environment.contracts.BUSD.address);
-                    this.contractsAddress.push(environment.contracts.USDT.address);
-                    // @ts-ignore
-                    this.poolContract = new this.web3.eth.Contract(environment.contracts.StableSmartSwapPool.ABI, environment.contracts.StableSmartSwapPool.address);
-
+                    window.BinanceChain.on('accountsChanged', (_chainId) => {
+                        this.chainConfig = environment.chains[_chainId];
+                        if (!this.chainConfig || !this.chainConfig.enabled) {
+                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                            return;
+                        }
+                    });
+                    if (this.isConnected) {
+                        // this.web3.eth.getAccounts().then(accounts => {
+                        //     this.accounts = accounts;
+                        //     this.loadData();
+                        // });
+                    }
+                    this.initContracts();
                     intervalSubject.unsubscribe();
                 }
                 if (acc >= 3 && !this.web3) { // 3秒提示安装币安钱包
-                    dialog.open(IntallWalletDlgComponent);
+                    this.dialog.open(IntallWalletDlgComponent, { height: '20%', width: '40%' });
                     intervalSubject.unsubscribe();
                 }
             }
@@ -85,12 +113,32 @@ export class BootService {
         });
     }
 
+    private initContracts() {
+        // @ts-ignore
+        this.daiContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.DAI.address);
+        // @ts-ignore
+        this.busdContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.BUSD.address);
+        // @ts-ignore
+        this.usdtContract = new this.web3.eth.Contract(environment.coinABI, this.chainConfig.contracts.USDT.address);
+        this.contracts.push(this.daiContract);
+        this.contracts.push(this.busdContract);
+        this.contracts.push(this.usdtContract);
+        this.contractsAddress.push(this.chainConfig.contracts.DAI.address);
+        this.contractsAddress.push(this.chainConfig.contracts.BUSD.address);
+        this.contractsAddress.push(this.chainConfig.contracts.USDT.address);
+        // @ts-ignore
+        this.poolContract = new this.web3.eth.Contract(environment.poolABI, this.chainConfig.contracts.SSSPool.address);
+
+    }
+
     public connectWallet() {
         if (this.web3) {
             this.web3.eth.getAccounts().then(accounts => {
                 this.accounts = accounts;
                 this.loadData();
             });
+        } else {
+            this.dialog.open(IntallWalletDlgComponent, { height: '20%', width: '40%' });
         }
     }
 
@@ -113,9 +161,9 @@ export class BootService {
             this.balance.usdt = new BigNumber(usdtBalanceStr).div(new BigNumber(10).exponentiatedBy(usdtDecimals));
             this.balance.lp = new BigNumber(lpBalanceStr).div(new BigNumber(10).exponentiatedBy(lpDecimals));
 
-            let pDaiBalanceStr = await this.daiContract.methods.balanceOf(environment.contracts.StableSmartSwapPool.address).call({ from: this.accounts[0] });
-            let pBusdBalanceStr = await this.busdContract.methods.balanceOf(environment.contracts.StableSmartSwapPool.address).call({ from: this.accounts[0] });
-            let pUsdtBalanceStr = await this.usdtContract.methods.balanceOf(environment.contracts.StableSmartSwapPool.address).call({ from: this.accounts[0] });
+            let pDaiBalanceStr = await this.daiContract.methods.balanceOf(this.chainConfig.contracts.SSSPool.address).call({ from: this.accounts[0] });
+            let pBusdBalanceStr = await this.busdContract.methods.balanceOf(this.chainConfig.contracts.SSSPool.address).call({ from: this.accounts[0] });
+            let pUsdtBalanceStr = await this.usdtContract.methods.balanceOf(this.chainConfig.contracts.SSSPool.address).call({ from: this.accounts[0] });
 
             this.poolInfo.dai = new BigNumber(pDaiBalanceStr).div(new BigNumber(10).exponentiatedBy(daiDecimals));
             this.poolInfo.busd = new BigNumber(pBusdBalanceStr).div(new BigNumber(10).exponentiatedBy(busdDecimals));
@@ -134,7 +182,7 @@ export class BootService {
             usdtAmt = this.web3.utils.toWei(String(usdtAmt), 'ether');
             let data = this.poolContract.methods.add_liquidity([daiAmt, busdAmt, usdtAmt], 0).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, gas: 6721975, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }
@@ -144,7 +192,7 @@ export class BootService {
     public async approve(i: number, amt: string): Promise<any> {
         if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
             amt = this.web3.utils.toWei(String(amt), 'ether');
-            let data = this.contracts[i].methods.approve(environment.contracts.StableSmartSwapPool.address, amt).encodeABI();
+            let data = this.contracts[i].methods.approve(this.chainConfig.contracts.SSSPool.address, amt).encodeABI();
             try {
                 return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.contractsAddress[i], data: data });
             } catch (e) {
@@ -159,7 +207,7 @@ export class BootService {
             minAmt = this.web3.utils.toWei(String(minAmt), 'ether');
             let data = this.poolContract.methods.exchange(i, j, amt, minAmt).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, value: 0, gas: 6721975, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, value: 0, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }
@@ -174,7 +222,7 @@ export class BootService {
             let lp = await this.poolContract.methods.balanceOf(this.accounts[0]).call();
             let data = this.poolContract.methods.remove_liquidity_imbalance([daiAmt, busdAmt, usdtAmt], lp.toString()).encodeABI();
             try {
-                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, gas: 6721975, data: data });
+                return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.chainConfig.contracts.SSSPool.address, gas: 6721975, data: data });
             } catch (e) {
                 console.log(e);
             }

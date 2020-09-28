@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { SwapCompComponent } from './swap-comp/swap-comp.component';
 import { AddliquidityCompComponent } from './addliquidity-comp/addliquidity-comp.component';
 import { RedeemliquidityCompComponent } from './redeemliquidity-comp/redeemliquidity-comp.component';
+import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-network.component';
 
 @NgModule({
     declarations: [
@@ -19,7 +20,8 @@ import { RedeemliquidityCompComponent } from './redeemliquidity-comp/redeemliqui
         IntallWalletDlgComponent,
         SwapCompComponent,
         AddliquidityCompComponent,
-        RedeemliquidityCompComponent
+        RedeemliquidityCompComponent,
+        UnsupportedNetworkComponent
     ],
     imports: [
         BrowserModule,

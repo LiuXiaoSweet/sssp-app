@@ -129,9 +129,9 @@ export class BootService {
 
     public async addLiquidity(daiAmt: string, busdAmt: string, usdtAmt: string): Promise<any> {
         if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
-            daiAmt = this.web3.utils.toWei(daiAmt, 'ether');
-            busdAmt = this.web3.utils.toWei(busdAmt, 'ether');
-            usdtAmt = this.web3.utils.toWei(usdtAmt, 'ether');
+            daiAmt = this.web3.utils.toWei(String(daiAmt), 'ether');
+            busdAmt = this.web3.utils.toWei(String(busdAmt), 'ether');
+            usdtAmt = this.web3.utils.toWei(String(usdtAmt), 'ether');
             let data = this.poolContract.methods.add_liquidity([daiAmt, busdAmt, usdtAmt], 0).encodeABI();
             try {
                 return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: environment.contracts.StableSmartSwapPool.address, gas: 6721975, data: data });
@@ -143,7 +143,7 @@ export class BootService {
 
     public async approve(i: number, amt: string): Promise<any> {
         if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
-            amt = this.web3.utils.toWei(amt, 'ether');
+            amt = this.web3.utils.toWei(String(amt), 'ether');
             let data = this.contracts[i].methods.approve(environment.contracts.StableSmartSwapPool.address, amt).encodeABI();
             try {
                 return await this.web3.eth.sendTransaction({ from: this.accounts[0], to: this.contractsAddress[i], data: data });
@@ -168,9 +168,9 @@ export class BootService {
 
     public async redeemImBalance(daiAmt: string, busdAmt: string, usdtAmt: string): Promise<any> {
         if (this.poolContract && this.daiContract && this.busdContract && this.usdtContract) {
-            daiAmt = this.web3.utils.toWei(daiAmt, 'ether');
-            busdAmt = this.web3.utils.toWei(busdAmt, 'ether');
-            usdtAmt = this.web3.utils.toWei(usdtAmt, 'ether');
+            daiAmt = this.web3.utils.toWei(String(daiAmt), 'ether');
+            busdAmt = this.web3.utils.toWei(String(busdAmt), 'ether');
+            usdtAmt = this.web3.utils.toWei(String(usdtAmt), 'ether');
             let lp = await this.poolContract.methods.balanceOf(this.accounts[0]).call();
             let data = this.poolContract.methods.remove_liquidity_imbalance([daiAmt, busdAmt, usdtAmt], lp.toString()).encodeABI();
             try {

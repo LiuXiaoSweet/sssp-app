@@ -7,7 +7,8 @@
 
             <div class="ConnectedButton"
               *ngIf="boot.isConnected; else noConnect">
-                <span>{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
+                <span class="network">Network</span>
+                <span class="address">{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
                 <img src="assets/static/img/conncted.png" alt="">
             </div>
             <ng-template #noConnect>

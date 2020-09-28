@@ -16,6 +16,8 @@
             </div>
             <div class="second">
                 <input type="number" name="daiAmt" [(ngModel)]="daiAmt" placeholder="Enter an amount">
+                <button class="approve">Approve</button>
+                <button class="noApprove">Approve</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -32,6 +34,8 @@
             </div>
             <div class="second">
                 <input type="number" name="busdAmt" [(ngModel)]="busdAmt" placeholder="Enter an amount">
+                <button class="approve">Approve</button>
+                <button class="noApprove">Approve</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -48,15 +52,17 @@
             </div>
             <div class="second">
                 <input type="number" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="Enter an amount">
+                <button class="approve">Approve</button>
+                <button class="noApprove">Approve</button>
             </div>
         </div>
     </div>
     <div class="butDiv">
-        <button (click)="approveDai()" style="margin-bottom: 1em;">Approve
+        <!-- <button (click)="approveDai()" style="margin-bottom: 1em;">Approve
             DAI</button>
         <button (click)="approveBusd()" style="margin-bottom: 1em;">Approve
             BUSD</button>
-        <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button>
+        <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
         <button (click)="addLiquidity()">Add Liquidity</button>
     </div>
 </div>

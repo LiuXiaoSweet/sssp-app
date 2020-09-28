@@ -18,9 +18,9 @@ export class BootService {
     web3: Web3;
     wallet: WalletBase;
     accounts: string[] = new Array();
-    bianceChain: any;
+    // bianceChain: any;
 
-    isConnected: boolean = false;
+    // isConnected: boolean = false;
 
     balance: Balance = new Balance();
 
@@ -40,73 +40,12 @@ export class BootService {
 
     constructor(private dialog: MatDialog) {
         let acc = 0;
-        let intervalCheckNetwork = interval(1000).subscribe(async num => {
-            if (this.web3) {
-                let chainId = await this.web3.eth.getChainId();
-                if (this.chainId != chainId) {
-                    if (!environment.chains[chainId]) {
-                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
-                        this.accounts.splice(0, this.accounts.length);
-                        this.balance.clear();
-                        this.poolInfo.clear();
-                    } else if (!environment.chains[chainId].enabled) {
-                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
-                        this.chainConfig = environment.chains[chainId];
-                        this.accounts.splice(0, this.accounts.length);
-                        this.balance.clear();
-                        this.poolInfo.clear();
-                    } else {
-                        this.chainConfig = environment.chains[chainId];
-                        this.initContracts();
-                    }
-                    this.chainId = chainId;
-                }
-            }
-        });
+
         let intervalSubject = interval(200).subscribe(
             async num => {
                 acc += num;
-                // @ts-ignore
-                if (!this.web3 && window.BinanceChain) {
-                    // @ts-ignore
-                    this.bianceChain = window.BinanceChain;
-                    this.isConnected = await this.bianceChain.isConnected();
-                    // @ts-ignore
-                    this.web3 = new Web3(window.BinanceChain);
-                    let chainId = await this.web3.eth.getChainId();
-                    this.chainConfig = environment.chains[chainId];
-                    this.chainId = chainId;
-                    if (!this.chainConfig || !this.chainConfig.enabled) {
-                        this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
-                        return;
-                    }
-
-                    // @ts-ignore
-                    window.BinanceChain.on('chainChanged', (_chainId) => {
-                        this.chainConfig = environment.chains[_chainId];
-                        if (!this.chainConfig || !this.chainConfig.enabled) {
-                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
-                            return;
-                        }
-                    });
-                    // @ts-ignore
-                    window.BinanceChain.on('accountsChanged', (_chainId) => {
-                        this.chainConfig = environment.chains[_chainId];
-                        if (!this.chainConfig || !this.chainConfig.enabled) {
-                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
-                            return;
-                        }
-                    });
-                    if (this.isConnected) {
-                        // this.web3.eth.getAccounts().then(accounts => {
-                        //     this.accounts = accounts;
-                        //     this.loadData();
-                        // });
-                    }
-                    this.initContracts();
-                    intervalSubject.unsubscribe();
-                }
-                if (acc >= 3 && !this.web3) { // 3秒提示安装币安钱包
+                // @ts-ignore 
+                if (acc >= 3 && !window.BinanceChain) { // 3秒提示安装币安钱包
                     this.dialog.open(IntallWalletDlgComponent, { height: '20%', width: '40%' });
                     intervalSubject.unsubscribe();
                 }
@@ -137,7 +76,64 @@ export class BootService {
 
     }
 
-    public connectWallet() {
+    public async connectWallet() {
+        // @ts-ignore
+        if (!this.web3 && window.BinanceChain) {
+            // @ts-ignore
+            // this.bianceChain = window.BinanceChain;
+            // await this.bianceChain.isConnected();
+            // @ts-ignore
+            this.web3 = new Web3(window.BinanceChain);
+            let chainId = await this.web3.eth.getChainId();
+            this.chainConfig = environment.chains[chainId];
+            this.chainId = chainId;
+            if (!this.chainConfig || !this.chainConfig.enabled) {
+                this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                return;
+            }
+            let intervalCheckNetwork = interval(1000).subscribe(async num => {
+                if (this.web3 && this.chainId) {
+                    let chainId = await this.web3.eth.getChainId();
+                    if (this.chainId != chainId) {
+                        if (!environment.chains[chainId]) {
+                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                            this.accounts.splice(0, this.accounts.length);
+                            this.balance.clear();
+                            this.poolInfo.clear();
+                            this.web3 = null;
+                        } else if (!environment.chains[chainId].enabled) {
+                            this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                            this.chainConfig = environment.chains[chainId];
+                            this.accounts.splice(0, this.accounts.length);
+                            this.balance.clear();
+                            this.poolInfo.clear();
+                            this.web3 = null;
+                        } else {
+                            this.chainConfig = environment.chains[chainId];
+                            this.initContracts();
+                        }
+                        this.chainId = chainId;
+                    }
+                }
+            });
+            // @ts-ignore
+            // window.BinanceChain.on('chainChanged', (_chainId) => {
+            //     this.chainConfig = environment.chains[_chainId];
+            //     if (!this.chainConfig || !this.chainConfig.enabled) {
+            //         this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+            //         return;
+            //     }
+            // });
+            // @ts-ignore
+            // window.BinanceChain.on('accountsChanged', (_chainId) => {
+            //     this.chainConfig = environment.chains[_chainId];
+            //     if (!this.chainConfig || !this.chainConfig.enabled) {
+            //         this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+            //         return;
+            //     }
+            // });
+            this.initContracts();
+        }
         if (this.web3) {
             if (this.chainConfig && this.chainConfig.enabled) {
                 this.web3.eth.getAccounts().then(accounts => {
@@ -146,10 +142,9 @@ export class BootService {
                 });
             } else {
                 this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                this.web3 = null;
             }
-        } else {
-            this.dialog.open(IntallWalletDlgComponent, { height: '20%', width: '40%' });
-        }
+        } 
     }
 
     public async loadData() {

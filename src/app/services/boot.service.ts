@@ -40,15 +40,21 @@ export class BootService {
 
     constructor(private dialog: MatDialog) {
         let acc = 0;
-        let intervalCheckNetwork = interval(500).subscribe(async num => {
+        let intervalCheckNetwork = interval(1000).subscribe(async num => {
             if (this.web3) {
                 let chainId = await this.web3.eth.getChainId();
                 if (this.chainId != chainId) {
                     if (!environment.chains[chainId]) {
                         this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+                        this.accounts.splice(0, this.accounts.length);
+                        this.balance.clear();
+                        this.poolInfo.clear();
                     } else if (!environment.chains[chainId].enabled) {
                         this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
                         this.chainConfig = environment.chains[chainId];
+                        this.accounts.splice(0, this.accounts.length);
+                        this.balance.clear();
+                        this.poolInfo.clear();
                     } else {
                         this.chainConfig = environment.chains[chainId];
                         this.initContracts();
@@ -133,10 +139,14 @@ export class BootService {
 
     public connectWallet() {
         if (this.web3) {
-            this.web3.eth.getAccounts().then(accounts => {
-                this.accounts = accounts;
-                this.loadData();
-            });
+            if (this.chainConfig && this.chainConfig.enabled) {
+                this.web3.eth.getAccounts().then(accounts => {
+                    this.accounts = accounts;
+                    this.loadData();
+                });
+            } else {
+                this.dialog.open(UnsupportedNetworkComponent, { height: '20%', width: '40%' });
+            }
         } else {
             this.dialog.open(IntallWalletDlgComponent, { height: '20%', width: '40%' });
         }

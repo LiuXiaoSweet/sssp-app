@@ -5,37 +5,37 @@
         <div class="el-checkbox-group">
             <div class="el-checkbox l" label="复选框 A">
                 <input type="radio" [ngModel]="left" name="left" value="0" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/DAI.png" alt="">
-                <span>DAI</span>
+                <img src="assets/static/img/coins/DAI.png" alt="" (click)="chooseLeft('0')">
+                <span (click)="chooseLeft('0')">DAI</span>
             </div>
             <div class="el-checkbox border_let r" label="复选框 C">
                 <input type="radio" [ngModel]="right" name="right" value="0" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/DAI.png" alt="">
-                <span>DAI</span>
+                <img src="assets/static/img/coins/DAI.png" alt="" (click)="chooseRight('0')">
+                <span (click)="chooseRight('0')">DAI</span>
             </div>
         </div>
         <div class="el-checkbox-group">
             <div class="el-checkbox l" label="复选框 A">
                 <input type="radio" [ngModel]="left" name="left" value="1" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/BUSD.png" alt="">
-                <span>BUSD</span>
+                <img src="assets/static/img/coins/BUSD.png" alt="" (click)="chooseLeft('1')">
+                <span (click)="chooseLeft('1')">BUSD</span>
             </div>
             <div class="el-checkbox border_let r" label="复选框 C">
                 <input type="radio" [ngModel]="right" name="right" value="1" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/BUSD.png" alt="">
-                <span>BUSD</span>
+                <img src="assets/static/img/coins/BUSD.png" alt="" (click)="chooseRight('1')">
+                <span (click)="chooseRight('1')">BUSD</span>
             </div>
         </div>
         <div class="el-checkbox-group">
             <div class="el-checkbox l" label="复选框 A">
                 <input type="radio" [ngModel]="left" name="left" value="2" (ngModelChange)="chooseLeft($event)">
-                <img src="assets/static/img/coins/USDT.png" alt="">
-                <span>USDT</span>
+                <img src="assets/static/img/coins/USDT.png" alt="" (click)="chooseLeft('2')">
+                <span (click)="chooseLeft('2')">USDT</span>
             </div>
             <div class="el-checkbox border_let r" label="复选框 C">
                 <input type="radio" [ngModel]="right" name="right" value="2" (ngModelChange)="chooseRight($event)">
-                <img src="assets/static/img/coins/USDT.png" alt="">
-                <span>USDT</span>
+                <img src="assets/static/img/coins/USDT.png" alt="" (click)="chooseRight('2')">
+                <span (click)="chooseRight('2')">USDT</span>
             </div>
         </div>
         <div class="enterDiv">

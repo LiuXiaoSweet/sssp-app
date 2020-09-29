@@ -87,4 +87,12 @@ export class SwapCompComponent implements OnInit {
             });
         }
     }
+
+    // leftClick(i) {
+    //     this.left = i;
+    // }
+
+    // rightClick(i) {
+    //     this.right = i;
+    // }
 }

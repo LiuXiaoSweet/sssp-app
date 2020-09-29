@@ -72,8 +72,8 @@ export class AddliquidityCompComponent implements OnInit {
 
     approveUsdt() {
         this.status = ActionStatus.Approving;
-        if (this.daiAmt) {
-            this.boot.approve(2, String(this.daiAmt ? this.daiAmt : 0)).then(r => {
+        if (this.usdtAmt) {
+            this.boot.approve(2, String(this.usdtAmt ? this.usdtAmt : 0)).then(r => {
                 this.usdtApproved = true;
                 this.status = ActionStatus.Approved;
             });

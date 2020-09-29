@@ -4,20 +4,25 @@
             <div class="logo">
                 <img class="cursor" src="assets/static/img/logo.png" alt="logo">
             </div>
-
-            <div class="ConnectedButton"
-              *ngIf="boot.accounts.length>0; else noConnect">
-                <span class="network">{{boot.chainConfig?boot.chainConfig.name:''}}</span>
-                <span class="address">{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
-                <img src="assets/static/img/conncted.png" alt="">
+            <div class="leftpart">
+                <div class="ConnectedButton"
+                *ngIf="boot.accounts.length>0; else noConnect">
+                  <span class="network">{{boot.chainConfig?boot.chainConfig.name:''}}</span>
+                  <span class="address">{{boot.accounts.length>0?boot.accounts[0]:''}}</span>
+                  <img src="assets/static/img/conncted.png" alt="">
+              </div>
+              <ng-template #noConnect>
+                  <!-- data-toggle="modal" data-target="#con-close-modal -->
+                  <button class="noConnectButton btn btn-primary" (click)="connectWallet()">
+                      <img src="assets/static/img/noConnct.png" alt="">
+                      <span>Connect to a Wallet</span>
+                  </button>
+              </ng-template>
+              <div class="lang">
+                  <img src="assets/static/img/en.png" alt="">
+                  <img src="assets/static/img/cn.png" alt="" style="display: none;">
+              </div>
             </div>
-            <ng-template #noConnect>
-                <!-- data-toggle="modal" data-target="#con-close-modal -->
-                <button class="noConnectButton btn btn-primary" (click)="connectWallet()">
-                    <img src="assets/static/img/noConnct.png" alt="">
-                    <span>Connect to a Wallet</span>
-                </button>
-            </ng-template>
         </div>
     </div>
     <div class="trade-pc">

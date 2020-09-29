@@ -38,7 +38,7 @@
         width: 100%;
     }
     
-    #maxDiv .navigation .main .noConnectButton {
+    #maxDiv .navigation .main .leftpart .noConnectButton {
         padding: 0px;
         width: 190px;
         height: 32px;
@@ -52,17 +52,17 @@
         outline: none;
     }
     
-    #maxDiv .navigation .main .noConnectButton img {
+    #maxDiv .navigation .main .leftpart .noConnectButton img {
         float: left;
         width: 19%;
     }
     
-    #maxDiv .navigation .main .ConnectedButton img {
+    #maxDiv .navigation .main .leftpart .ConnectedButton img {
         float: right;
         width: 30px;
     }
     
-    #maxDiv .navigation .main .ConnectedButton .address {
+    #maxDiv .navigation .main .leftpart .ConnectedButton .address {
         width: 60px;
         overflow: hidden;
         white-space: nowrap;
@@ -71,7 +71,7 @@
         line-height: 25px;
     }
     
-    #maxDiv .navigation .main .ConnectedButton .network {
+    #maxDiv .navigation .main .leftpart .ConnectedButton .network {
         padding: 0px 10px;
         margin-right: 10px;
         background: #2480FF;
@@ -83,6 +83,14 @@
         text-align: center;
         float: left;
     
+    }
+
+    #maxDiv .navigation .main .leftpart .lang {
+        float: right;
+        margin-left: 10px;
+        img{
+            width: 30px;
+        }
     }
     
     #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {
@@ -257,9 +265,9 @@
         width: 100%;
     }
     
-    #maxDiv .navigation .main .noConnectButton {
+    #maxDiv .navigation .main .leftpart .noConnectButton {
         padding: 0px;
-        width: 190px;
+        width: 168px;
         height: 32px;
         background: #FAFAFA;
         color: #0E0E0E;
@@ -269,19 +277,20 @@
         line-height: 32px;
         letter-spacing: 1px;
         outline: none;
+        font-size: 0.11rem;
     }
     
-    #maxDiv .navigation .main .noConnectButton img {
+    #maxDiv .navigation .main .leftpart .noConnectButton img {
         float: left;
         width: 19%;
     }
     
-    #maxDiv .navigation .main .ConnectedButton img {
+    #maxDiv .navigation .main .leftpart .ConnectedButton img {
         float: right;
         width: 30px;
     }
     
-    #maxDiv .navigation .main .ConnectedButton .address {
+    #maxDiv .navigation .main .leftpart .ConnectedButton .address {
         width: 60px;
         overflow: hidden;
         white-space: nowrap;
@@ -290,7 +299,7 @@
         line-height: 25px;
     }
     
-    #maxDiv .navigation .main .ConnectedButton .network {
+    #maxDiv .navigation .main .leftpart .ConnectedButton .network {
         padding: 0px 10px;
         margin-right: 10px;
         background: #2480FF;
@@ -302,6 +311,16 @@
         text-align: center;
         float: left;
     
+    }
+
+    #maxDiv .navigation .main .leftpart .lang {
+        float: right;
+        margin-left: 5px;
+        margin-top: 2px;
+        width: 30px;
+        img{
+            width: 30px;
+        }
     }
     
     #maxDiv .navigation .main .el-dialog .el-dialog__body .titleDiv p img {

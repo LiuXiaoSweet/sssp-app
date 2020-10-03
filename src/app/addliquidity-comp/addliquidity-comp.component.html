@@ -66,8 +66,8 @@
         <button (click)="approveBusd()" style="margin-bottom: 1em;">Approve
             BUSD</button>
         <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
-        <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()" [disabled]="status==3"
-            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{'Add
+        <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()" [disabled]="status===0||status===3||status===1||status===4"
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1||status===4}">{{'Add
             Liquidity'|translate}}</button>
         <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{'Connect to a
             Wallet'|translate}}</button>

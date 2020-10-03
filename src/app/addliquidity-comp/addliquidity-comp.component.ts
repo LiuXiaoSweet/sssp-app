@@ -81,9 +81,9 @@ export class AddliquidityCompComponent implements OnInit {
     }
 
     addLiquidity() {
-        if (this.daiAmt && this.busdAmt && this.usdtAmt) {
+        if (this.daiAmt || this.busdAmt || this.usdtAmt) {
             this.status = ActionStatus.TransationSending;
-            this.boot.addLiquidity(String(this.daiAmt), String(this.busdAmt), String(this.usdtAmt)).then(r => {
+            this.boot.addLiquidity(String(this.daiAmt ? this.daiAmt : 0), String(this.busdAmt ? this.busdAmt : 0), String(this.usdtAmt ? this.usdtAmt : 0)).then(r => {
                 this.status = ActionStatus.TransactionEnd;
             });
         }

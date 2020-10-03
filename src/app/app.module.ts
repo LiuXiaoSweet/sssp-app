@@ -12,6 +12,9 @@ import { SwapCompComponent } from './swap-comp/swap-comp.component';
 import { AddliquidityCompComponent } from './addliquidity-comp/addliquidity-comp.component';
 import { RedeemliquidityCompComponent } from './redeemliquidity-comp/redeemliquidity-comp.component';
 import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-network.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [
@@ -29,8 +32,19 @@ import { UnsupportedNetworkComponent } from './unsupported-network/unsupported-n
         MatDialogModule,
         MatButtonModule,
         FormsModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: createTranslateLoader,
+                deps: [HttpClient]
+            }
+        }),
+        HttpClientModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
 })
 export class AppModule { }
+export function createTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
+}

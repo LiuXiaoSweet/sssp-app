@@ -2,7 +2,7 @@
 <div class="withdrawLiqui-pc">
     <div class="main">
         <div class="LiquidityRatio">
-            <p>Your pool share {{boot.balance.lp.toFixed(9)}} (sSSLP)</p>
+            <p>{{'Your pool share'|translate}} {{boot.balance.lp.toFixed(9)}} (sSSLP)</p>
             <!-- <div class="enterDiv">
                 <input type="text" name="" placeholder="Please enter a number (%)">
             </div> -->
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="daiAmt" [(ngModel)]="daiAmt" placeholder="Enter an amount">
+                        <input type="text" name="daiAmt" [(ngModel)]="daiAmt" placeholder="{{'Enter an amount'|translate}}">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="busdAmt" [(ngModel)]="busdAmt" placeholder="Enter an amount">
+                        <input type="text" name="busdAmt" [(ngModel)]="busdAmt" placeholder="{{'Enter an amount'|translate}}">
                     </div>
                 </div>
                 <div class="coinDiv">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="second">
-                        <input type="text" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="Enter an amount">
+                        <input type="text" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="{{'Enter an amount'|translate}}">
                     </div>
                 </div>
             </div>
@@ -57,8 +57,8 @@
     </div>
     <div class="butDiv">
         <button *ngIf="boot.accounts.length>0" (click)="redeemCoin()" [disabled]="status===1"
-            [ngClass]="{'myBtn':status===0||status===2,'myBtn-disabled': status===1}">Withdraw Liquidity</button>
-        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
-            Wallet</button>
+            [ngClass]="{'myBtn':status===0||status===2,'myBtn-disabled': status===1}">{{"Withdraw Liquidity"|translate}}</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{"Connect to a
+            Wallet"|translate}}</button>
     </div>
 </div>

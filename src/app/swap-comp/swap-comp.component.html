@@ -40,7 +40,7 @@
         </div>
         <div class="enterDiv">
             <img src="assets/static/img/exchange.png" alt="">
-            <div class="blanceDiv"><span class="blance">Balance</span>
+            <div class="blanceDiv"><span class="blance">{{"Balance"|translate}}</span>
                 <p [ngSwitch]="left">
                     <span *ngSwitchCase="'0'">{{boot.balance.dai.toFixed(9)}}</span> <span
                         *ngSwitchCase="'0'">DAI</span>
@@ -52,13 +52,13 @@
             </div>
             <div class="inputDiv">
                 <div>
-                    <input type="number" name="amt" [(ngModel)]="amt" placeholder="Enter an amount">
-                    <span (click)="maxAmt()">MAX</span>
+                    <input type="number" name="amt" [(ngModel)]="amt" placeholder="{{'Enter an amount'|translate}}">
+                    <span (click)="maxAmt()">{{'MAX'|translate}}</span>
                 </div>
                 <div>
-                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="Min Amount">
+                    <input class="minInput" type="number" name="minAmt" [(ngModel)]="minAmt" placeholder="{{'Min Amount'|translate}}">
                     <button (click)="approve()" [disabled]="status==1"
-                        [ngClass]="{myBtn: status!==1,'myBtn-disabled':boot.accounts.length===0||status===1||status===3}">Approve</button>
+                        [ngClass]="{myBtn: status!==1,'myBtn-disabled':boot.accounts.length===0||status===1||status===3}">{{'Approve'|translate}}</button>
                 </div>
             </div>
         </div>
@@ -71,8 +71,8 @@
         <!-- <button *ngIf="boot.accounts.length>0&&!approved" (click)="approve()" [disabled]="status==1">First
             Approve</button> -->
         <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status==3"
-            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">Exchange</button>
-        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
-            Wallet</button>
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{"Exchange"|translate}}</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{"Connect to a
+            Wallet"|translate}}</button>
     </div>
 </div>

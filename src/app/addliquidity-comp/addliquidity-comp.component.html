@@ -9,16 +9,16 @@
                     <span>DAI</span>
                 </div>
                 <div>
-                    <span>Balance</span>
+                    <span>{{'Balance'|translate}}</span>
                     <span>{{boot.balance.dai.toFixed(9)}}</span>
                     <span>DAI</span>
                 </div>
             </div>
             <div class="second">
-                <input type="number" name="daiAmt" [(ngModel)]="daiAmt" placeholder="Enter an amount">
+                <input type="number" name="daiAmt" [(ngModel)]="daiAmt" placeholder="{{'Enter an amount'|translate}}">
                 <button style="margin-bottom: 1em;"
                     [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
-                    (click)="approveDai()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
+                    (click)="approveDai()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -28,16 +28,16 @@
                     <span>BUSD</span>
                 </div>
                 <div>
-                    <span>Balance</span>
+                    <span>{{'Balance'|translate}}</span>
                     <span>{{boot.balance.busd.toFixed(9)}}</span>
                     <span>BUSD</span>
                 </div>
             </div>
             <div class="second">
-                <input type="number" name="busdAmt" [(ngModel)]="busdAmt" placeholder="Enter an amount">
+                <input type="number" name="busdAmt" [(ngModel)]="busdAmt" placeholder="{{'Enter an amount'|translate}}">
                 <button style="margin-bottom: 1em;"
                     [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
-                    (click)="approveBusd()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
+                    (click)="approveBusd()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
             </div>
         </div>
         <div class="coinDiv">
@@ -47,16 +47,16 @@
                     <span>USDT</span>
                 </div>
                 <div>
-                    <span>Balance</span>
+                    <span>{{'Balance'|translate}}</span>
                     <span>{{boot.balance.usdt.toFixed(9)}}</span>
                     <span>USDT</span>
                 </div>
             </div>
             <div class="second">
-                <input type="number" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="Enter an amount">
+                <input type="number" name="usdtAmt" [(ngModel)]="usdtAmt" placeholder="{{'Enter an amount'|translate}}">
                 <button style="margin-bottom: 1em;"
                     [ngClass]="{myBtn: boot.accounts.length>0||status===0||status===2||status==4,'myBtn-disabled':boot.accounts.length===0||status===1}"
-                    (click)="approveUsdt()" [disabled]="boot.accounts.length===0||status===1">Approve</button>
+                    (click)="approveUsdt()" [disabled]="boot.accounts.length===0||status===1">{{'Approve'|translate}}</button>
             </div>
         </div>
     </div>
@@ -67,9 +67,9 @@
             BUSD</button>
         <button (click)="approveUsdt()" style="margin-bottom: 1em;">Approve USDT</button> -->
         <button *ngIf="boot.accounts.length>0" (click)="addLiquidity()" [disabled]="status==3"
-            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">Add
-            Liquidity</button>
-        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">Connect to a
-            Wallet</button>
+            [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{'Add
+            Liquidity'|translate}}</button>
+        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{'Connect to a
+            Wallet'|translate}}</button>
     </div>
 </div>

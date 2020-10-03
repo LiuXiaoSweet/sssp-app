@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { BootService } from './services/boot.service';
+import { LanguageService } from './services/language.service';
 
 @Component({
     selector: 'app-root',
@@ -11,8 +12,8 @@ export class AppComponent {
 
     curTab = 0;
 
-    
-    constructor(public boot: BootService) {
+
+    constructor(public boot: BootService, public lang: LanguageService) {
     }
 
     public connectWallet() {
@@ -23,7 +24,11 @@ export class AppComponent {
         this.curTab = tab;
     }
 
-    
+    changeLang(lang: string) {
+        this.lang.changeLanguage(lang);
+    }
 
-    
+
+
+
 }

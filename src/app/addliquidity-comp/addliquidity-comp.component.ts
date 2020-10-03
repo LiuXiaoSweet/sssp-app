@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { BootService } from '../services/boot.service';
 
 export enum ActionStatus {
@@ -26,6 +26,9 @@ export class AddliquidityCompComponent implements OnInit {
 
     status: ActionStatus = ActionStatus.None;
 
+    @Output() loading: EventEmitter<any> = new EventEmitter();
+    @Output() loaded: EventEmitter<any> = new EventEmitter();
+
     constructor(public boot: BootService) { }
 
     ngOnInit(): void {
@@ -51,31 +54,37 @@ export class AddliquidityCompComponent implements OnInit {
     }
 
     approveDai() {
-        this.status = ActionStatus.Approving;
         if (this.daiAmt) {
+            this.status = ActionStatus.Approving;
+            this.loading.emit();
             this.boot.approve(0, String(this.daiAmt ? this.daiAmt : 0)).then(r => {
                 this.daiApproved = true;
                 this.status = ActionStatus.Approved;
+                this.loaded.emit();
             });
         }
     }
 
     approveBusd() {
-        this.status = ActionStatus.Approving;
         if (this.busdAmt) {
+            this.status = ActionStatus.Approving;
+            this.loading.emit();
             this.boot.approve(1, String(this.busdAmt ? this.busdAmt : 0)).then(r => {
                 this.busdApproved = true;
                 this.status = ActionStatus.Approved;
+                this.loaded.emit();
             });
         }
     }
 
     approveUsdt() {
-        this.status = ActionStatus.Approving;
         if (this.usdtAmt) {
+            this.status = ActionStatus.Approving;
+            this.loading.emit();
             this.boot.approve(2, String(this.usdtAmt ? this.usdtAmt : 0)).then(r => {
                 this.usdtApproved = true;
                 this.status = ActionStatus.Approved;
+                this.loaded.emit();
             });
         }
     }
@@ -83,8 +92,11 @@ export class AddliquidityCompComponent implements OnInit {
     addLiquidity() {
         if (this.daiAmt || this.busdAmt || this.usdtAmt) {
             this.status = ActionStatus.TransationSending;
+            this.loading.emit();
             this.boot.addLiquidity(String(this.daiAmt ? this.daiAmt : 0), String(this.busdAmt ? this.busdAmt : 0), String(this.usdtAmt ? this.usdtAmt : 0)).then(r => {
                 this.status = ActionStatus.TransactionEnd;
+                this.boot.loadData();
+                this.loaded.emit();
             });
         }
     }

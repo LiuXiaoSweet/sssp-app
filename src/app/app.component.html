@@ -1,4 +1,5 @@
 <div class="maxDiv" id="maxDiv">
+    <mat-progress-bar mode="indeterminate" color="warn" *ngIf="loading"></mat-progress-bar>
     <div class="navigation">
         <div class="main">
             <div class="logo">
@@ -35,9 +36,11 @@
                     <li [ngClass]="{active: curTab==2}" (click)="changeTab(2)">{{'Manage Liquidity'|translate}}</li>
                 </ul>
                 <div class="SwapDiv">
-                    <app-swap-comp [hidden]="curTab!=0"></app-swap-comp>
-                    <app-addliquidity-comp [hidden]="curTab!=1"></app-addliquidity-comp>
-                    <app-redeemliquidity-comp [hidden]="curTab!=2"></app-redeemliquidity-comp>
+                    <app-swap-comp [hidden]="curTab!=0" (loading)="onLoading()" (loaded)="onLoaded()"></app-swap-comp>
+                    <app-addliquidity-comp [hidden]="curTab!=1" (loading)="onLoading()" (loaded)="onLoaded()">
+                    </app-addliquidity-comp>
+                    <app-redeemliquidity-comp [hidden]="curTab!=2" (loading)="onLoading()" (loaded)="onLoaded()">
+                    </app-redeemliquidity-comp>
 
                 </div>
             </div>

@@ -12,12 +12,15 @@ export class AppComponent {
 
     curTab = 0;
 
+    loading: boolean = false;
+
 
     constructor(public boot: BootService, public lang: LanguageService) {
     }
 
     public connectWallet() {
-        this.boot.connectWallet();
+        this.loading = true;
+        this.boot.connectWallet().then(() => this.loading = false);
     }
 
     changeTab(tab) {
@@ -29,6 +32,12 @@ export class AppComponent {
     }
 
 
+    onLoading() {
+        this.loading = true;
+    }
 
+    onLoaded() {
+        this.loading = false;
+    }
 
 }

@@ -1,3 +1,4 @@
+import { EventEmitter, Output } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import BigNumber from 'bignumber.js';
 import { BootService } from '../services/boot.service';
@@ -25,6 +26,9 @@ export class SwapCompComponent implements OnInit {
     approved: boolean = false;
 
     status: ActionStatus = ActionStatus.None;
+
+    @Output() loading: EventEmitter<any> = new EventEmitter();
+    @Output() loaded: EventEmitter<any> = new EventEmitter();
 
     constructor(public boot: BootService) { }
 
@@ -70,9 +74,11 @@ export class SwapCompComponent implements OnInit {
     approve() {
         if (this.amt) {
             this.status = ActionStatus.Approving;
+            this.loading.emit();
             this.boot.approve(Number(this.left), this.amt).then(() => {
                 this.approved = true;
                 this.status = ActionStatus.Approved;
+                this.loaded.emit();
             });
         }
     }
@@ -80,10 +86,13 @@ export class SwapCompComponent implements OnInit {
     exchange() {
         if (this.amt) {
             this.status = ActionStatus.Exchaging;
+            this.loading.emit();
             this.boot.exchange(Number(this.left), Number(this.right), this.amt, this.minAmt ? this.minAmt : '0').then(res => {
                 this.status = ActionStatus.Exchanged;
                 this.approved = false;
                 console.log(res);
+                this.boot.loadData();
+                this.loaded.emit();
             });
         }
     }
@@ -95,4 +104,9 @@ export class SwapCompComponent implements OnInit {
     // rightClick(i) {
     //     this.right = i;
     // }
+
+    connectWallet() {
+        this.loading.emit();
+        this.boot.connectWallet().then(() => this.loaded.emit());
+    }
 }

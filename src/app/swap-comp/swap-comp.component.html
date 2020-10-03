@@ -72,7 +72,7 @@
             Approve</button> -->
         <button *ngIf="boot.accounts.length>0" (click)="exchange()" [disabled]="status==3"
             [ngClass]="{myBtn: status===2||status===4,'myBtn-disabled':status===0||status===3||status===1}">{{"Exchange"|translate}}</button>
-        <button *ngIf="boot.accounts.length==0" (click)="boot.connectWallet()" class="myBtn">{{"Connect to a
+        <button *ngIf="boot.accounts.length==0" (click)="connectWallet()" class="myBtn">{{"Connect to a
             Wallet"|translate}}</button>
     </div>
 </div>
